@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  apache2:
+    image: httpinfra/apache2-php-server
+    container_name: apache2php
+    restart: always
+    ports:
+      - "8080:80"
+      - "4433:443"
+
