@@ -15,6 +15,6 @@ Ce conteneur va déployer un serveur HTTP permettant de retourner au format JSON
 3. Démarrer le conteneur :
 `docker-compose up -d`
 
-4. Il est possible de faire des requêtes HTTP à l'adresse http://localhost:3001/ocean ou http://localhost:3001/desert :
+4. Il est dès lors possible de faire des requêtes HTTP à l'adresse http://localhost:3001/ocean ou http://localhost:3001/desert :
 ![](img/desert.jpg)
 ![](img/ocean.jpg)
