@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  node:
+    image: httpinfra/node-animals
+    container_name: nodeanimals
+    restart: always
+    ports:
+      - "3001:3000"
+

@@ -1,0 +1,15 @@
+{
+  "name": "step2",
+  "version": "0.1.0",
+  "description": "For the http infra lab",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dany da Costa",
+  "license": "ISC",
+  "dependencies": {
+    "chance": "^1.1.7",
+    "express": "^4.17.1"
+  }
+}
