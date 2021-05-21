@@ -19,7 +19,7 @@ RUN a2enmod rewrite
 # Copy the html files
 COPY ./public-html/ /var/www/html/
 
-EXPOSE 80 443
+EXPOSE 80
 
 # By default start up apache in the foreground
 CMD ["apachectl", "-D", "FOREGROUND"]
