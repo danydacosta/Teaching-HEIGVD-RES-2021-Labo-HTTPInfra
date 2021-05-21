@@ -2,12 +2,14 @@
 
 #### Demo
 
-1. Contruire l'image :
+1. Placer les fichiers du site web dans le dossier public-html
+
+2. Contruire l'image :
 `docker build -t httpinfra/apache2-php-server .` ou `./build-image.sh`
 
-2. Placer les fichiers du site web dans le dossier public-html
 3. Démarrer le conteneur :
 `docker-compose up -d`
+
 4. Le site web est accessible à l'adresse http://localhost:8080/index.php :
 ![](img/site.jpg)
 
