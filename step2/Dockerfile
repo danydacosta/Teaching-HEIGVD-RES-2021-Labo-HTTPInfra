@@ -1,8 +1,8 @@
 FROM node:latest
 
-COPY src /opt/app
+COPY src/ /opt/app
 
-WORKDIR /opt/app # Needed for the next command
-RUN npm install # Install dependencies in package.json
+WORKDIR /opt/app
+RUN npm install 
 
 CMD ["node", "/opt/app/index.js"]
