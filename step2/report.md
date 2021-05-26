@@ -4,12 +4,7 @@ Ce conteneur va déployer un serveur HTTP permettant de retourner au format JSON
 
 #### Demo
 
-1. Charger les dépendances :
-`cd src`
-`npm install`
-
-2. Contruire l'image :
-`cd ..`
+1. Contruire l'image :
 `docker build -t httpinfra/node-animals .` ou `./build-image.sh`
 
 3. Démarrer le conteneur :
