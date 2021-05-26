@@ -1,0 +1,39 @@
+version: "3.9"
+services:
+  apache2:
+    image: httpinfra/apache2-php-server
+    container_name: apache2php
+    restart: always
+    networks:
+      mynetwork:
+        ipv4_address: 172.20.0.2
+  node:
+    image: httpinfra/node-animals
+    container_name: nodeanimals
+    restart: always
+    depends_on:
+      - "apache2"
+    networks:
+      mynetwork:
+        ipv4_address: 172.20.0.3
+  apacheproxy:
+    image: httpinfra/reverse-proxy-static
+    container_name: apacheproxy
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - "node"
+    networks:
+      mynetwork:
+        ipv4_address: 172.20.0.4
+networks:
+  mynetwork:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+
+
+
