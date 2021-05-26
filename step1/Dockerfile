@@ -19,6 +19,9 @@ RUN a2enmod rewrite
 # Copy the html files
 COPY ./public-html/ /var/www/html/
 
+# Delete the base index.html file
+RUN rm -rf /var/www/html/index.html
+
 EXPOSE 80
 
 # By default start up apache in the foreground

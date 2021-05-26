@@ -10,7 +10,7 @@
 3. Démarrer le conteneur :
 `docker-compose up -d`
 
-4. Le site web est accessible à l'adresse http://localhost:8080/index.php :
+4. Le site web est accessible à l'adresse http://localhost:8080/ :
 ![](img/site.jpg)
 
 #### Explications du Dockerfile
@@ -30,7 +30,12 @@ Le Dockerfile copie le contenu du dossier `public-html` au répertoire racine d'
 ```
 COPY ./public-html/ /var/www/html/
 ```
-puis démarre le serveur :
+On supprime le fichier `index.html` présent par défaut dans la config apache pour ne pas entrer en conflit avec notre `index.php` :
+```
+RUN rm -rf /var/www/html/index.html
+```
+
+puis on démarre le serveur :
 
 ```
 CMD ["apachectl", "-D", "FOREGROUND"]
