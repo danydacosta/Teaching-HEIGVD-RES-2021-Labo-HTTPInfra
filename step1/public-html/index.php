@@ -65,8 +65,8 @@
         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
           <div class="icon-box">
             <div class="icon"><i class="ri-stack-line"></i></div>
-            <h4 class="title"><a href="">Jolie case n° 1</a></h4>
-            <p class="description">Si satisfaisant de passer sa souris dessus</p>
+            <h4 class="title"><a href="">Dynamic animal</h4>
+            <p class="description" id="dynamicAnimal">Si tu vois ceci, c'est qu'il y a un problème !</p>
           </div>
         </div>
 
@@ -95,9 +95,13 @@
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/purecounter/purecounter.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Loading dynamic animal RES - Labo HTTP -->
+  <script src="assets/js/dynamicAnimal.js"> </script>
 
 </body>
 
