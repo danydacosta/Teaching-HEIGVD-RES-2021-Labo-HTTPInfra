@@ -1,53 +1,28 @@
-## Step 1
+## Step 4
+
+Cette étape est une extension de la première. Seules quelques modifications ont été faites pour accomplir l'étape.
 
 #### Demo
 
-1. Placer les fichiers du site web dans le dossier public-html
+1. Pour effectuer cette démo, il faut rebuild le container de la step 1 avec le script `build-image.sh`. Pour plus de détails, voir la démo de la step 1.
 
-2. Contruire l'image :
-`docker build -t httpinfra/apache2-php-server .` ou `./build-image.sh`
+2. Ensuite, il est nécessaire de lancer les containers comme pour la démo de la step 3. S'y référer si besoin.
 
-3. Démarrer le conteneur :
-`docker-compose up -d`
 
-4. Le site web est accessible à l'adresse http://localhost:8080/ :
-![](img/site.jpg)
+#### Contenu dynamique
 
-#### Explications du Dockerfile
+Sur le site, il y un script jQuery qui s'occupe de faire des requêtes AJAX chaque 2 secondes pour changer un contenu du site. Les requêtes ciblent le contenu json généré dynamquement à la step 2. Ensuite, la première ligne du json est récupérée pour être affichée.  
+![](img/step4_SOP.JPG)
 
-Je ne me suis pas basé sur une image existante de httpd. Je suis parti sur une base Ubuntu et j'ai installé les packages nécessaire à Apache et PHP à la main. Ceci permet une granularité fine sur les paquets installés :
-```
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt install -y apache2 php php-cli php-fpm php-json php-common php-mysql \
- php-zip php-gd php-mbstring php-curl php-xml php-pear php-bcmath
-```
+#### Same-origin policy
 
-On active ensuite les modules Apache permettant entre autres la réécriture d'URL, l'utilisation d'un proxy, l'activation de SSL et de PHP.
-```
-RUN a2enmod proxy_fcgi setenvif
-RUN ...
-```
-Le Dockerfile copie le contenu du dossier `public-html` au répertoire racine d'Apache :
-```
-COPY ./public-html/ /var/www/html/
-```
-On supprime le fichier `index.html` présent par défaut dans la config apache pour ne pas entrer en conflit avec notre `index.php` :
-```
-RUN rm -rf /var/www/html/index.html
-```
+Pour des raisons de sécurité, il est interdit d'effectuer des requêtes AJAX vers un autre domaine. Dans notre cas, sans reverse proxy, la requête aurait pour cible un autre domaine, car il est situé sur un autre container et donc une autre adresse IP. Avec le reverse proxy, on arrive à "tromper" le client web car il cible le même domaine (le reverse proxy) mais le reverse proxy fait suivre la requête à une autre machine.  
+Pour voir la restriction s'activer, nous avons temporairement changé l'adresse cible de la requête AJAX pour voir l'erreur :  
+![](img/step4_divDynamic.JPG)
 
-puis on démarre le serveur :
 
-```
-CMD ["apachectl", "-D", "FOREGROUND"]
-```
+#### Configuration
 
-#### Explications du docker-compose
+Pour cette étape, seul un script jQuery a été nécessaire. Il se trouve dans `step4/public-html/assets/js/dynamicAnimal.js`. On s'est fortement inspiré de l'exemple fait dans ls vidéo.  
 
-Le fichier `docker-compose.yml` détient la configuration a appliquer pour lancer le conteneur. Je spécifie l'image à utiliser, le nom du conteneur, la politique de redémarrage du conteneur (si l'hôte redémarre, je veux que le conteneur le fasse aussi automatiquement), et je fais le port mapping. C'est également dans ce fichier que l'on ferait les configurations nécessaires pour utiliser des volumes.
-
-#### Configuration d'Apache
-
-Par défaut Apache s'installe avec un vhost configuré et lancer avec comme répertoire racine `/var/www/html`. Il n'y a donc pas besoin de faire des configurations particulières.
-
-Les fichiers de configuration Apache se trouvent sous `/etc/apache2` et les vhost se trouve dans le sous-répertoire `sites-available`. C'est là-dedans que l'on configure les vhost et on les active avec la commande `a2ensite vhost.conf`
-
+Pour faire fonctionner le script, nous avons aussi dû ajouter un `id` sur une balise html pour pouvoir y accéder via le script.
