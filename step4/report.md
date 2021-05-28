@@ -12,13 +12,13 @@ Cette étape est une extension de la première. Seules quelques modifications on
 #### Contenu dynamique
 
 Sur le site, il y un script jQuery qui s'occupe de faire des requêtes AJAX chaque 2 secondes pour changer un contenu du site. Les requêtes ciblent le contenu json généré dynamquement à la step 2. Ensuite, la première ligne du json est récupérée pour être affichée.  
-![](img/step4_SOP.JPG)
+![](img/step4_divDynamic.JPG)
 
 #### Same-origin policy
 
 Pour des raisons de sécurité, il est interdit d'effectuer des requêtes AJAX vers un autre domaine. Dans notre cas, sans reverse proxy, la requête aurait pour cible un autre domaine, car il est situé sur un autre container et donc une autre adresse IP. Avec le reverse proxy, on arrive à "tromper" le client web car il cible le même domaine (le reverse proxy) mais le reverse proxy fait suivre la requête à une autre machine.  
 Pour voir la restriction s'activer, nous avons temporairement changé l'adresse cible de la requête AJAX pour voir l'erreur :  
-![](img/step4_divDynamic.JPG)
+![](img/step4_SOP.JPG)
 
 
 #### Configuration
