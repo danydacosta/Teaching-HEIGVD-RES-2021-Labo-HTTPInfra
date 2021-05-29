@@ -74,7 +74,7 @@
           <div class="icon-box">
             <div class="icon"><i class="ri-palette-line"></i></div>
             <h4 class="title"><a href="">Jolie case n° 2</a></h4>
-            <p class="description">Tout ça grâce à un template bootstrap gratuit !</p>
+            <p class="description">Adress IP du serveur : <?php echo $_SERVER['SERVER_ADDR']; ?></p>
           </div>
         </div>
 
