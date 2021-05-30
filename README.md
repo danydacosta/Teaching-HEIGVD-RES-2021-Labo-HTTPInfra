@@ -1,3 +1,7 @@
+**Les dossiers extraN représentent les parties supplémentaires du labo. Nous avons implémenté les parties bonus 1, 2 et 4**
+
+
+
 # Teaching-HEIGVD-RES-2021-Labo-HTTPInfra
 
 ## Objectives
