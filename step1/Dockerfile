@@ -3,7 +3,7 @@ MAINTAINER Dany da Costa  <danydc@comac.ch>
 
 # Install apache, PHP
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt install -y apache2 php php-cli php-fpm php-json php-common php-mysql \
- php-zip php-gd php-mbstring php-curl php-xml php-pear php-bcmath
+ php-zip php-gd php-mbstring php-curl php-xml php-pear php-bcmath tcpdump
 
 # Enable apache mods.
 RUN a2enmod proxy_fcgi setenvif

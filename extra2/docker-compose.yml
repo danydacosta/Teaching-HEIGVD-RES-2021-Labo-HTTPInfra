@@ -1,0 +1,56 @@
+version: "3.9"
+services:
+  apache2_1:
+    image: httpinfra/apache2-php-server
+    container_name: apache2php_1
+    restart: always
+    networks:
+      mynetwork:
+        ipv4_address: 172.50.0.2
+  apache2_2:
+    image: httpinfra/apache2-php-server
+    container_name: apache2php_2
+    restart: always
+    networks:
+      mynetwork:
+        ipv4_address: 172.50.0.3
+  node_1:
+    image: httpinfra/node-animals
+    container_name: nodeanimals_1
+    restart: always
+    depends_on:
+      - "apache2_1"
+    networks:
+      mynetwork:
+        ipv4_address: 172.50.0.4
+  node_2:
+    image: httpinfra/node-animals
+    container_name: nodeanimals_2
+    restart: always
+    depends_on:
+      - "apache2_1"
+    networks:
+      mynetwork:
+        ipv4_address: 172.50.0.5
+  apacheproxy:
+    image: httpinfra/reverse-proxy-dynamic
+    container_name: apacheproxy
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - "node_2"
+    networks:
+      mynetwork:
+        ipv4_address: 172.50.0.6
+    environment:
+      - STATIC_APP_1=172.50.0.2
+      - STATIC_APP_2=172.50.0.3
+      - DYNAMIC_APP_1=172.50.0.4:3000
+      - DYNAMIC_APP_2=172.50.0.5:3000
+networks:
+  mynetwork:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.50.0.0/16
